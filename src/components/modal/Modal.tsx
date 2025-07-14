@@ -1,10 +1,22 @@
 import React from 'react'
 
-const Modal = () => {
+interface ModalProps{
+  active: boolean,
+  modalClose: ()=> void
+}
+
+const Modal: React.FC<ModalProps> = ({active, modalClose}) => {
+  const closeWrapper = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+    if (target.classList?.contains('popup')) {
+      modalClose()
+    }
+  };
+  
   return (
-    <div className="popup popup_type_new-card popup_is-animated">
+    <div onClick={closeWrapper} className={`popup popup_type_new-card popup_is-animated ${active ? 'popup_is-opened' : ""}`}>
       <div className="popup__content">
-        <button type="button" className="popup__close"></button>
+        <button type="button" className="popup__close" onClick={modalClose}></button>
         <h3 className="popup__title">Новое место</h3>
         <form className="popup__form" name="new-place">
           <input type="text" name="place-name" className="popup__input popup__input_type_card-name" placeholder="Название"

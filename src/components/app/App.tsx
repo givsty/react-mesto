@@ -1,3 +1,8 @@
+import Modal from "../modal/Modal";
+import { useEffect, useState } from "react";
+import type { Places } from "../types/types";
+import Card from "../card/Card";
+
 import logoImg from "../../images/logo.svg";
 
 import "../../vendor/normalize.css";
@@ -27,9 +32,6 @@ import "../../blocks/profile/__title/profile__title.css";
 //Стили footer
 import "../../blocks/footer/footer.css";
 import "../../blocks/footer/__copyright/footer__copyright.css";
-import { useEffect, useState } from "react";
-import type { Places } from "../types/types";
-import Card from "../card/Card";
 
 import "../../blocks/places/places.css";
 
@@ -41,8 +43,30 @@ import "../../blocks/card/__image/card__image.css";
 import "../../blocks/card/__like-button/__card-like__wrapper/card__like__container.css";
 import "../../blocks/card/__like-button/_is-active/card__like-button_is-active.css";
 import "../../blocks/card/__title/card__title.css";
+
+//Модалки
+
+import '../../blocks/popup/popup.css'
+import '../../blocks/popup/__button/_disabled/popup__button_disabled.css'
+import '../../blocks/popup/__button/popup__button.css'
+import '../../blocks/popup/__caption/popup__caption.css'
+import '../../blocks/popup/__close/popup__close.css'
+import '../../blocks/popup/__content/_content/popup__content_content_image.css'
+import '../../blocks/popup/__content/_content/popup__content_content_profile_image.css'
+import '../../blocks/popup/__content/popup__content.css'
+import '../../blocks/popup/__form/popup__form.css'
+import '../../blocks/popup/__image/popup__image.css'
+import '../../blocks/popup/__input/__error/popup__input-error.css'
+import '../../blocks/popup/__input/popup__input.css'
+import '../../blocks/popup/__title/popup__title.css'
+import '../../blocks/popup/_is-animated/popup_is-animated.css'
+import '../../blocks/popup/_is-opened/popup_is-opened.css'
+
 const App = () => {
   const [places, setPlaces] = useState<Places[]>([]);
+  const [active,  setActive] = useState(false)
+  const modalOpen = () => setActive(true)
+  const modalClose = () => setActive(false)
   const config = {
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-mag-4",
     headers: {
@@ -96,7 +120,7 @@ const App = () => {
               <button className="profile__edit-button" type="button"></button>
               <p className="profile__description"></p>
             </div>
-            <button className="profile__add-button" type="button"></button>
+            <button className="profile__add-button" type="button" onClick={modalOpen}></button>
           </section>
           <section className="places page__section">
             <ul className="places__list">
@@ -106,6 +130,7 @@ const App = () => {
                     name={element.name}
                     counter={element.likes}
                     image={element.link}
+                    key={element._id}
                   />
                 );
               })}
@@ -115,6 +140,7 @@ const App = () => {
         <footer className="footer page__section">
           <p className="footer__copyright">© 2021 Mesto Russia</p>
         </footer>
+        <Modal active={active} modalClose={modalClose}/>
       </div>
     </div>
   );
