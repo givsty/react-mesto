@@ -1,4 +1,4 @@
-export interface Places {
+export interface Items {
   createdAt: string,
   likes: Likes[],
   link: string,
