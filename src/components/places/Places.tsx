@@ -16,6 +16,7 @@ const Places: React.FC<PlacesProps> = ({ items }) => {
               name={element.name}
               counter={element.likes}
               image={element.link}
+              key={element._id}
             />
           );
         })}

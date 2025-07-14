@@ -14,3 +14,13 @@ export interface Likes {
   name: string,
   _id: string
 }
+
+export type apiConfig = {
+  baseUrl: string,
+  headers: apiHeaders
+}
+
+type apiHeaders = {
+  authorization: string,
+  "Content-Type": "application/json",
+}
