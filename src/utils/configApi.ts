@@ -1,9 +1,9 @@
 // import type { apiConfig } from "../components/types/types";
 
-// export const config: apiConfig = {
-//   baseUrl: process.env.REACT_APP_API,
-//   headers: {
-//     authorization: process.env.REACT_APP_TOKEN,
-//     "Content-Type": "application/json",
-//   },
-// };
+export const config = {
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-mag-4",
+  headers: {
+    authorization: "561bff47-1094-4520-9c65-f40457c0b35c",
+    "Content-Type": "application/json",
+  },
+};

@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { config } from "../../utils/configApi";
+import type { PersonData } from "../types/types";
 interface ModalProps {
   modalOpen: () => void
 }
 const Profile: React.FC<ModalProps> = ({modalOpen}) => {
+  const [profileSettings, setProfileSettings] = useState<PersonData>()
+   useEffect(() => {
+     fetch(`${config.baseUrl}/users/me`, {
+       headers: config.headers,
+     })
+       .then((result) => {
+         return result.json();
+       })
+       .then((res) => {
+         setProfileSettings(res);
+         console.log(res);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   }, []);
+  
   return (
     <section className="profile page__section">
-      <div className="profile__image">
+      <div className="profile__image" style={{backgroundImage: profileSettings?.avatar}}>
         <svg
           width="26"
           height="26"
@@ -18,9 +37,9 @@ const Profile: React.FC<ModalProps> = ({modalOpen}) => {
         </svg>
       </div>
       <div className="profile__info">
-        <h1 className="profile__title"></h1>
+        <h1 className="profile__title">{profileSettings?.name}</h1>
         <button className="profile__edit-button" type="button"></button>
-        <p className="profile__description"></p>
+        <p className="profile__description">{profileSettings?.about}</p>
       </div>
       <button
         className="profile__add-button"
