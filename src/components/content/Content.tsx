@@ -6,9 +6,11 @@ import { config } from "../../utils/configApi";
 // import { config } from "../../utils/configApi";
 interface ContentProps {
   modalOpen: () => void;
+  items: Items[]
+  setItems: (items: Items[])=> void
 }
-const Content: React.FC<ContentProps> = ({ modalOpen }) => {
-  const [items, setItems] = useState<Items[]>([]);
+
+const Content: React.FC<ContentProps> = ({ modalOpen, setItems, items }) => {
 
   useEffect(() => {
     fetch(`${config.baseUrl}/cards`, {

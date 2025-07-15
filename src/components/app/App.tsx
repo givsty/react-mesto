@@ -61,19 +61,21 @@ import '../../blocks/popup/_is-opened/popup_is-opened.css'
 import Header from "../header/Header";
 import Content from "../content/Content";
 import Footer from "../footer/Footer";
+import type { Items } from "../types/types";
 
 const App = () => {
   const [active,  setActive] = useState(false)
   const modalOpen = () => setActive(true)
   const modalClose = () => setActive(false)
-
+  const [items, setItems] = useState<Items[]>([]);
+  
   return (
     <div className="page">
       <div className="page__content">
         <Header />
-        <Content modalOpen={modalOpen}/>
+        <Content modalOpen={modalOpen} items={items} setItems={setItems}/>
         <Footer />
-        <Modal active={active} modalClose={modalClose}/>
+        <Modal active={active} modalClose={modalClose} setItems={setItems} items={items}/>
       </div>
     </div>
   );

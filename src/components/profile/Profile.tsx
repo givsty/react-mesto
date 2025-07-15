@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { config } from "../../utils/configApi";
 import type { PersonData } from "../types/types";
+
 interface ModalProps {
   modalOpen: () => void
 }
+
 const Profile: React.FC<ModalProps> = ({modalOpen}) => {
   const [profileSettings, setProfileSettings] = useState<PersonData>()
    useEffect(() => {
